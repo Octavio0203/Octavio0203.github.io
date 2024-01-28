@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .login-container {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 300px;
+            text-align: center;
+        }
+
+        .login-container h2 {
+            margin-bottom: 20px;
+        }
+
+        .login-container input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+
+        .login-container button {
+            background-color: #4caf50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .login-container button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+<div class="login-container">
+    <h2>Iniciar Sesión</h2>
+    <form id="loginForm" onsubmit="return validarCampos()">
+        <input type="text" name="usuario" id="usuario" placeholder="Correo Electrónico" required>
+        <br>
+        <input type="password" name="contrasena" id="contrasena" placeholder="Contraseña" required>
+        <br>
+    <button type="submit" >Validar Campos</button>
+    </form>
+</div>
+
+<script>
+    function validarCampos() {
+        // Obtener los valores del formulario
+        const usuario = document.getElementById('usuario').value.trim();
+        const contrasena = document.getElementById('contrasena').value.trim();
+
+        // Validar longitud mínima de 8 caracteres para la contraseña
+        if (contrasena.length < 8) {
+            alert('La contraseña debe tener al menos 8 caracteres.');
+            return false;
+        }
+
+        // Validar longitud máxima de 8 caracteres para la contraseña
+        if (contrasena.length >= 16) {
+            alert('La contraseña no puede tener más de 8 caracteres.');
+            return false;
+        }
+
+        // Validar el formato del correo electrónico
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(usuario)) {
+            alert('Por favor, ingresa un correo electrónico válido.');
+            return false;
+        }
+        // Validar que la contraseña contenga al menos una letra mayúscula
+        if (!/[A-Z]/.test(contrasena)) {
+            alert('La contraseña debe contener al menos una letra mayúscula.');
+            return false;
+        }
+
+        // Validar que la contraseña contenga al menos un carácter especial
+        if (!/[@$!%*?&#]/.test(contrasena)) {
+            alert('La contraseña debe contener al menos un carácter especial (@, $, !, %, *, ?, #, etc.).');
+            return false;
+        }
+
+        alert('Campos validados correctamente.');
+        // Puedes realizar otras acciones después de la validación
+    }
+</script>
+
+</body>
+</html>
